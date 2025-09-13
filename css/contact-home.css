@@ -1,0 +1,226 @@
+/* ===== Design tokens ===== */
+:root{
+  --bg-start:#0b2b6f;
+  --bg-end:#0a265f;
+  --brand:#1b66ff;
+  --mint:#18c6a4;
+
+  --ink:#eaf2ff;
+  --ink-2:#b7c6e6;
+
+  --field-bg:rgba(255,255,255,.04);
+  --field-bd:#2b4782;
+  --field-focus:#68bdfb;
+
+  --card:#ffffff;
+  --card-ink:#0b1b33;
+
+  --radius:16px;
+  --radius-sm:12px;
+  --shadow:0 16px 36px rgba(6, 29, 70, .35);
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after{ box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans";
+  -webkit-font-smoothing: antialiased;
+  color: var(--ink);
+  background: #0e1740;
+}
+
+.container{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 32px);
+}
+
+/* ===== Section layout ===== */
+.booking{
+  background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+  padding-block: clamp(24px, 5vw, 64px);
+}
+
+.booking__grid{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(20px, 4vw, 56px);
+  align-items: start;
+}
+@media (max-width: 980px){
+  .booking__grid{ grid-template-columns: 1fr; }
+}
+
+/* ===== Left column ===== */
+.eyebrow{
+  margin: 0 0 8px;
+  color: #19d0a6;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .85rem;
+}
+
+.title{
+  margin: 0 0 14px;
+  font-size: clamp(1.8rem, 1.1rem + 2.4vw, 2.6rem);
+  line-height: 1.15;
+  color: #f0f5ff;
+}
+
+.form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  margin-top: 16px;
+}
+.form .field,
+.form .field-group{ width: 100%; }
+.form .field-group{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+}
+@media (max-width: 700px){
+  .form{ grid-template-columns: 1fr; }
+  .form .field-group{ grid-template-columns: 1fr; }
+}
+
+label{
+  display:block;
+  font-size: .85rem;
+  color: var(--ink-2);
+  margin: 0 0 6px;
+}
+.req{ color:#8ad2ff; }
+
+input, select{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--field-bg);
+  color: #fff;
+  border: 1px solid var(--field-bd);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+input::placeholder{ color:#9fb0d6; }
+
+input:focus, select:focus{
+  border-color: var(--field-focus);
+  box-shadow: 0 0 0 3px rgba(104,189,251,.25);
+  background: rgba(255,255,255,.06);
+}
+
+.err{
+  display:block;
+  min-height: 18px;
+  margin-top: 6px;
+  font-size: .82rem;
+  color: #ffd2d2;
+}
+
+.options{
+  grid-column: 1/-1;
+  border: 1px dashed rgba(255,255,255,.18);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--ink-2);
+}
+.options legend{
+  padding: 0 6px;
+  font-weight: 700;
+  color:#cfe2ff;
+}
+.opt{
+  margin-right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+.opt input{ accent-color: #19c6a5; }
+
+.btn{
+  grid-column: 1/-1;
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 18px;
+  font-weight: 800;
+  border-radius: 12px;
+  color: #0b2b6f;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--brand), var(--mint));
+  box-shadow: 0 16px 36px rgba(14, 180, 170, .28);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); opacity:.95; }
+
+.form-note{
+  grid-column: 1/-1;
+  margin: 8px 0 0;
+  color: #cfe2ff;
+  font-size: .95rem;
+}
+
+/* ===== Right column ===== */
+.photo-card{
+  background: var(--card);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+.photo-card img{
+  display:block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.blurb{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 14px;
+  align-items: start;
+  color: var(--ink);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+.blurb__icon{
+  width: 42px; height: 42px;
+  display:grid; place-items:center;
+  border-radius: 10px;
+  background: rgba(255,255,255,.16);
+  color: #cfe2ff;
+}
+.blurb__title{
+  margin: 2px 0 4px;
+  color: #eaf2ff;
+  font-size: 1.02rem;
+}
+.blurb__text{
+  margin: 0;
+  color: #bcd0f6;
+  grid-column: 2 / -1;
+}
+
+/* Small accessibility tweak on narrow screens */
+@media (max-width: 420px){
+  .opt{ white-space: normal; }
+}

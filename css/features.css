@@ -1,0 +1,170 @@
+/* ================= Design Tokens ================= */
+:root{
+  --brand:#0f5bd9;         /* deep blue for headings/buttons */
+  --brand-ink:#0a2a6b;     /* dark blue for headings */
+  --accent:#14c08a;        /* green eyebrow */
+  --ink:#0b1b33;
+  --muted:#5c6a82;
+
+  --line:#e6edf7;          /* subtle separators */
+  --icon-bg:#eef5ff;       /* soft blue icon tile */
+  --icon-ink:#1b4ab6;
+
+  --radius:16px;
+  --shadow:0 10px 24px rgba(20,30,60,.12);
+}
+
+/* ================= Base ================= */
+*,
+*::before,
+*::after{ box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans";
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 32px);
+}
+
+/* ================= Layout ================= */
+.commit{ padding-block: clamp(24px, 5vw, 64px); }
+
+.commit__grid{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;  /* left wider */
+  gap: clamp(20px, 4vw, 56px);
+}
+@media (max-width: 980px){
+  .commit__grid{ grid-template-columns: 1fr; }
+}
+
+/* ================= Intro (left) ================= */
+.eyebrow{
+  margin: 0 0 10px;
+  font-size: .86rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title{
+  margin: 0 0 14px;
+  color: #0d2f80;
+  font-weight: 800;
+  line-height: 1.04;
+  font-size: clamp(2.1rem, 1.3rem + 2.6vw, 3.1rem);
+}
+
+.lede{
+  margin: 0 0 10px;
+  color: var(--muted);
+  max-width: 58ch;
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 2px solid transparent;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+}
+.btn__icon{ display:grid; place-items:center; }
+
+.btn-primary{
+  background: linear-gradient(180deg, #1b66ff, #1456da);
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(20, 86, 218, .22);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+
+/* ================= Features (right) ================= */
+.features{
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(24px, 4vw, 60px);
+  row-gap: 28px;
+  padding-right: 6px;  /* room for divider shadow */
+}
+
+/* Center vertical divider */
+.features::before{
+  content:"";
+  position:absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--line);
+  transform: translateX(-.5px);
+  pointer-events: none;
+}
+@media (max-width: 980px){
+  .features{ grid-template-columns: 1fr; }
+  .features::before{ display:none; }
+}
+
+/* Each feature row has a bottom border like the mock */
+.feature{
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 12px 14px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Remove bottom border for the last row in each column (desktop) */
+@media (min-width: 981px){
+  .feature:nth-last-child(-n+2){ border-bottom-color: transparent; }
+}
+/* On mobile single column, keep only the last item borderless */
+@media (max-width: 980px){
+  .feature:last-child{ border-bottom-color: transparent; }
+}
+
+.feature__icon{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--icon-bg);
+  color: var(--icon-ink);
+  display:grid;
+  place-items:center;
+}
+
+.feature__title{
+  margin: 0;
+  color: #10307d;
+  font-size: clamp(1.02rem, .98rem + .2vw, 1.1rem);
+  line-height: 1.3;
+  font-weight: 800;
+}
+.feature__text{
+  grid-column: 2 / -1;
+  margin: 8px 0 0;
+  color: var(--muted);
+  max-width: 38ch;
+}
+
+/* ================= Motion (JS toggles .appear) ================= */
+.fade-root .fade-in{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.fade-root .fade-in.appear{
+  opacity: 1;
+  transform: translateY(0);
+}
